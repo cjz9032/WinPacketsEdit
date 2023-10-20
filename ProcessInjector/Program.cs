@@ -12,7 +12,7 @@ namespace ProcessInjector
     static class Program
     {
         public static int PID = -1;
-        public static string PNAME = string.Empty;
+        public static string PNAME = "Client.dat";
         public static string PATH = string.Empty;
 
         [DllImport("user32.dll")]

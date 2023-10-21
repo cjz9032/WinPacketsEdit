@@ -23,7 +23,7 @@ namespace ProcessInjector
         private int ProcessID = -1;
         private ComputerInfo ci = new ComputerInfo();
 
-        public Injector_Form(int pid = 25852)
+        public Injector_Form(int pid = 1)
         {
             InitializeComponent();
             this.Text = "进程注入器（x86, x64自适应）by RNShinoa";

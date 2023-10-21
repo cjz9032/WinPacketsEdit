@@ -33,6 +33,18 @@ namespace ProcessInjector
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
+                // 获取命令行参数
+                string[] commandLineArgs = Environment.GetCommandLineArgs();
+
+                // 打印命令行参数
+                Console.WriteLine("命令行参数:");
+                foreach (string arg in commandLineArgs)
+                {
+                    Console.WriteLine(arg);
+                }
+                int pid = 0;
+                int.TryParse(commandLineArgs[1],out pid);
+
                 if (!new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator))
                 {
                     ProcessStartInfo startInfo = new ProcessStartInfo {
@@ -53,7 +65,7 @@ namespace ProcessInjector
                 }
                 else
                 {
-                    Application.Run(new Injector_Form());
+                    Application.Run(new Injector_Form(pid));
                 }
             }
             catch (Exception ex)

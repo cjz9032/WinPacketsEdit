@@ -11,15 +11,15 @@ namespace WPELibrary.Lib
     public class WinSockHook
     {
         public Queue<SocketPacket> _SocketQueue = new Queue<SocketPacket>();
-        public bool Interecept_Recv;
-        public bool Interecept_RecvFrom;
-        public bool Interecept_Send;
-        public bool Interecept_SendTo;
-        public bool Display_Recv;
-        public bool Display_RecvFrom;
-        public bool Display_Send;
-        public bool Display_SendTo;
-        public bool Reset_CNT;
+        public bool Interecept_Recv = true;
+        public bool Interecept_RecvFrom= true;
+        public bool Interecept_Send= true;
+        public bool Interecept_SendTo= true;
+        public bool Display_Recv =  true;
+        public bool Display_RecvFrom= true;
+        public bool Display_Send= true;
+        public bool Display_SendTo= true;
+        public bool Reset_CNT= true;
         public int Interecept_CNT = 0;
         public int Recv_CNT = 0;
         public int Send_CNT = 0;
@@ -27,6 +27,7 @@ namespace WPELibrary.Lib
         private LocalHook lhSendTo = null;
         private LocalHook lhRecv = null;
         private LocalHook lhRecvFrom = null;
+        public SocketPacket lastSocket = null;
 
         [DllImport("ws2_32.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern int send(int socket, IntPtr buffer, int length, int flags);
@@ -165,6 +166,7 @@ namespace WPELibrary.Lib
             Marshal.Copy(ipBuff, destination, 0, iLen);
             SocketPacket item = new SocketPacket(sType, iSocket, iLen, destination, sAddr);
             this._SocketQueue.Enqueue(item);
+            lastSocket = item;
         }
 
         public void StartHook()

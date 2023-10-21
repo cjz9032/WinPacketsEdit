@@ -28,6 +28,7 @@ namespace WPELibrary
         private int iShowDataLen = 50;
         private bool bDebug = true;
         private bool bWakeUp = true;
+        public static int socketid = 0;
 
         public DLL_Form()
         {
